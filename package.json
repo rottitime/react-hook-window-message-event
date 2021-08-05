@@ -1,0 +1,34 @@
+{
+  "name": "react-hook-message-event",
+  "version": "1.0.0",
+  "description": "Hook for listening to window message event and posting message back to source",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rottitime/react-hook-window-message-event.git"
+  },
+  "keywords": [
+    "recat",
+    "hook",
+    "message",
+    "postmessage"
+  ],
+  "author": "rottitime",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rottitime/react-hook-window-message-event/issues"
+  },
+<<<<<<< HEAD
+  "homepage": "https://github.com/rottitime/react-hook-window-message-event#readme"
+=======
+  "homepage": "https://github.com/rottitime/react-hook-window-message-event#readme",
+  "devDependencies": {
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2"
+  }
+>>>>>>> c2b701f (Initial commit)
+}
