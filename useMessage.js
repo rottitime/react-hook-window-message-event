@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 const postMessage = (data, target, origin = '*') => target.postMessage(data, origin);
-
-export const useMessageSubscribe = (watch, eventHandler) => {
+const useMessage = (watch, eventHandler) => {
   const [history, setHistory] = useState([]);
   const [origin, setOrigin] = useState();
   const [source, setSource] = useState();
@@ -40,3 +39,5 @@ export const useMessageSubscribe = (watch, eventHandler) => {
   return { history, sendToParent };
 
 };
+
+export default useMessage;

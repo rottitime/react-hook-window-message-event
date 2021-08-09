@@ -18,10 +18,10 @@ The two main ways to use this hook is to listen to incoming messages or post out
 Import the hook in your component file
 
 ```js
-import { useMessageSubscribe } from "@rottitime/react-hook-message-event";
+import useMessage from "@rottitime/react-hook-message-event";
 ```
 
-The hook `useMessageSubscribe` takes two arguments. The first is the name of the event you want to listen to. The second is a optional callback which can be fired once a message has been recieved
+The hook `useMessage` takes two arguments. The first is the name of the event you want to listen to. The second is a optional callback which can be fired once a message has been recieved
 
 The callback provides two arguments. As per the example below
 
@@ -31,7 +31,7 @@ The callback provides two arguments. As per the example below
 ```js
 const ExampleComponent = () => {
   //Listen for the message 'authenticate' and then fire a callback
-  useMessageSubscribe("authenticate", (send, payload) => {
+  useMessage("authenticate", (send, payload) => {
     send({ type: "authenticate", success: true });
   });
 
@@ -42,7 +42,7 @@ const ExampleComponent = () => {
 ### Send a message to parent window
 
 ```js
-import { useMessageSubscribe } from "@rottitime/react-hook-message-event";
+import useMessage from "@rottitime/react-hook-message-event";
 ```
 
 In the example below, we are sending the message 'Hellow world' to the parent window
@@ -50,7 +50,7 @@ In the example below, we are sending the message 'Hellow world' to the parent wi
 ```js
 const ExampleComponent = () => {
   //Listen for the message 'authenticate' and then fire a callback
-  const { sendToParent } = useMessageSubscribe();
+  const { sendToParent } = useMessage();
   sendToParent("authenticate");
   return <div>Hellow world</div>;
 };
