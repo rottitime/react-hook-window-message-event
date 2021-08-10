@@ -1,9 +1,9 @@
 # React hook: Message event
 
-A hook to monitor messages incoming and also allow you to post out.
+React hook to monitor messages incoming and also allow you to post out.
 Utilising and simplifing the WebAPI for [Window.postMessage()](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) and [Window: message event](https://developer.mozilla.org/en-US/docs/Web/API/Window/message_event)
 
-## Install
+## Installation
 
 ```
 npm i @rottitime/react-hook-message-event
@@ -11,14 +11,19 @@ npm i @rottitime/react-hook-message-event
 
 ## Usage
 
-The two main ways to use this hook is to listen to incoming messages or post out your own messages.
+The two functionalities of this this hook.
 
-### Lisening to messages from other windows
+1. Listening for messages from other windows or frames
+2. Send a message to parent window/iframe
+
+### Listening for messages
+
+The hook takes usage of the [Window: message event](https://developer.mozilla.org/en-US/docs/Web/API/Window/message_event) to allow a component to listen for messages from other windows, iframes or tabs
 
 Import the hook in your component file
 
 ```js
-import useMessage from "@rottitime/react-hook-message-event";
+import useMessage from '@rottitime/react-hook-message-event'
 ```
 
 The hook `useMessage` takes two arguments. The first is the name of the event you want to listen to. The second is a optional callback which can be fired once a message has been recieved
@@ -31,18 +36,20 @@ The callback provides two arguments. As per the example below
 ```js
 const ExampleComponent = () => {
   //Listen for the message 'authenticate' and then fire a callback
-  useMessage("authenticate", (send, payload) => {
-    send({ type: "authenticate", success: true });
-  });
+  useMessage('authenticate', (send, payload) => {
+    send({ type: 'authenticate', success: true })
+  })
 
-  return <div>Hellow world</div>;
-};
+  return <div>Hellow world</div>
+}
 ```
 
-### Send a message to parent window
+### Send a message to parent window/iframe
+
+The hook also takes usage of the [Window.postMessage()](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) to allow you to post messages to the parent window/tab/iframe.
 
 ```js
-import useMessage from "@rottitime/react-hook-message-event";
+import useMessage from '@rottitime/react-hook-message-event'
 ```
 
 In the example below, we are sending the message 'Hellow world' to the parent window
@@ -50,8 +57,8 @@ In the example below, we are sending the message 'Hellow world' to the parent wi
 ```js
 const ExampleComponent = () => {
   //Listen for the message 'authenticate' and then fire a callback
-  const { sendToParent } = useMessage();
-  sendToParent("authenticate");
-  return <div>Hellow world</div>;
-};
+  const { sendToParent } = useMessage()
+  sendToParent('authenticate')
+  return <div>Hellow world</div>
+}
 ```
