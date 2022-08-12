@@ -2,7 +2,7 @@
   "name": "@rottitime/react-hook-message-event",
   "version": "1.0.8",
   "description": "Hook for listening to window message event and posting message back to source",
-  "main": "useMessage.js",
+  "main": "useMessage.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
