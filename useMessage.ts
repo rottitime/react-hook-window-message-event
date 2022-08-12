@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const postMessage = (data: IPostMessage, target: MessageEvent['source'], origin = '*') =>
-  target?.postMessage(data, { targetOrigin: origin })
+const postMessage = (
+  data: IPostMessage,
+  target: MessageEvent['source'],
+  origin = '*'
+) => target?.postMessage(data, { targetOrigin: origin })
 export type IPostMessage = { type: string; payload: Record<string, unknown> }
 type EventHandler = (
   callback: (data: IPostMessage) => unknown,
-  payload: IPostMessage['payload'],
+  payload: IPostMessage['payload']
 ) => unknown
 /**
  * It listens for a specific message type, and when it receives it, it calls the event handler with the
@@ -45,7 +48,7 @@ const useMessage = (watch: string, eventHandler: EventHandler) => {
         eventHandler(sendToSender, payload)
       }
     },
-    [watch, eventHandler, setSource, setOrigin],
+    [watch, eventHandler, setSource, setOrigin]
   )
 
   useEffect(() => {
