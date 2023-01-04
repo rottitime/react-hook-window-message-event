@@ -2,17 +2,20 @@
   "name": "@rottitime/react-hook-message-event",
   "version": "1.0.9",
   "description": "Hook for listening to window message event and posting message back to source",
-  "main": "useMessage.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
-    "lint": "tslint -p tsconfig.json",
-    "build": "tsc",
     "test": "jest --config jestconfig.json",
-    "preversion": "npm run lint",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint"
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [
     "react",
