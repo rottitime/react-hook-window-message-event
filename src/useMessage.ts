@@ -12,7 +12,7 @@ const postMessage = (data: IPostMessage, target: MessageEvent['source'], origin 
  * triggered.
  * @returns An object with two properties: history and sendToParent.
  */
-const useMessage = (watch: string, eventHandler: EventHandler) => {
+const useMessage = (watch: string, eventHandler?: EventHandler) => {
   const [history, setHistory] = useState<IPostMessage[]>([])
   const [origin, setOrigin] = useState<string>()
   const [source, setSource] = useState<MessageEvent['source'] | null>(null)
@@ -39,7 +39,7 @@ const useMessage = (watch: string, eventHandler: EventHandler) => {
         setSource(source)
         setOrigin(origin)
         setHistory((old) => [...old, payload])
-        eventHandler(sendToSender, payload)
+        if (typeof eventHandler === 'function') eventHandler(sendToSender, payload)
       }
     },
     [watch, eventHandler, setSource, setOrigin]
