@@ -56,7 +56,7 @@ In the example below, we are sending the message 'Hellow world' to the parent wi
 const ExampleComponent = () => {
   //Listen for the message 'authenticate' and then fire a callback
   const { sendToParent } = useMessage('authenticate')
-  sendToParent({ type: 'authenticate', payload: { messahe: 'hello world' } })
+  sendToParent({ type: 'authenticate', payload: { message: 'hello world' } })
   return <div>Hello world</div>
 }
 ```
