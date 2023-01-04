@@ -1,10 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const postMessage = (
-  data: IPostMessage,
-  target: MessageEvent['source'],
-  origin = '*'
-) => target?.postMessage(data, { targetOrigin: origin })
+const postMessage = (data: IPostMessage, target: MessageEvent['source'], origin = '*') =>
+  target?.postMessage(data, { targetOrigin: origin })
 export type IPostMessage = { type: string; payload: Record<string, unknown> }
 type EventHandler = (
   callback: (data: IPostMessage) => unknown,
