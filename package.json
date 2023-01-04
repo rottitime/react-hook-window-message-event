@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "test": "jest --config jestconfig.json",
+    "test:all": "npm test && npm run lint",
     "build": "tsc",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
