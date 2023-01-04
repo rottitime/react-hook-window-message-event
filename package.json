@@ -1,6 +1,6 @@
 {
   "name": "@rottitime/react-hook-message-event",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Hook for listening to window message event and posting message back to source",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -15,7 +15,7 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
+    "version": "git add -A src",
     "postversion": "git push && git push --tags"
   },
   "keywords": [
