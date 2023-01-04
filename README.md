@@ -37,7 +37,9 @@ The callback provides two arguments. As per the example below
 const ExampleComponent = () => {
   //Listen for the message 'authenticate' and then fire a callback
   useMessage('authenticate', (send, payload) => {
-    send({ type: 'authenticate', success: true })
+    console.log('I just received : ', payload)
+    //send back to sender a boolean payload
+    send({ type: 'authenticate', payload: { success: true } })
   })
 
   return <div>Hellow world</div>
@@ -53,8 +55,8 @@ In the example below, we are sending the message 'Hellow world' to the parent wi
 ```js
 const ExampleComponent = () => {
   //Listen for the message 'authenticate' and then fire a callback
-  const { sendToParent } = useMessage()
-  sendToParent('authenticate')
-  return <div>Hellow world</div>
+  const { sendToParent } = useMessage('authenticate')
+  sendToParent({ type: 'authenticate', payload: { messahe: 'hello world' } })
+  return <div>Hello world</div>
 }
 ```

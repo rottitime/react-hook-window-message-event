@@ -3,6 +3,7 @@ node_modules
 
 
 # misc
+lib
 .DS_Store
 .env.local
 .env.development.local
@@ -12,3 +13,4 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+

@@ -1,15 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { IPostMessage, EventHandler } from './types'
 
-const postMessage = (
-  data: IPostMessage,
-  target: MessageEvent['source'],
-  origin = '*'
-) => target?.postMessage(data, { targetOrigin: origin })
-export type IPostMessage = { type: string; payload: Record<string, unknown> }
-type EventHandler = (
-  callback: (data: IPostMessage) => unknown,
-  payload: IPostMessage['payload']
-) => unknown
+const postMessage = (data: IPostMessage, target: MessageEvent['source'], origin = '*') =>
+  target?.postMessage(data, { targetOrigin: origin })
+
 /**
  * It listens for a specific message type, and when it receives it, it calls the event handler with the
  * message payload and a function to send a message back to the sender
@@ -18,7 +12,7 @@ type EventHandler = (
  * triggered.
  * @returns An object with two properties: history and sendToParent.
  */
-const useMessage = (watch: string, eventHandler: EventHandler) => {
+const useMessage = (watch: string, eventHandler?: EventHandler) => {
   const [history, setHistory] = useState<IPostMessage[]>([])
   const [origin, setOrigin] = useState<string>()
   const [source, setSource] = useState<MessageEvent['source'] | null>(null)
@@ -39,13 +33,14 @@ const useMessage = (watch: string, eventHandler: EventHandler) => {
   }
 
   const onWatchEventHandler = useCallback(
+    // tslint:disable-next-line: no-shadowed-variable
     ({ origin, source, data }: MessageEvent) => {
       const { type, payload } = data
       if (type === watch) {
         setSource(source)
         setOrigin(origin)
         setHistory((old) => [...old, payload])
-        eventHandler(sendToSender, payload)
+        if (typeof eventHandler === 'function') eventHandler(sendToSender, payload)
       }
     },
     [watch, eventHandler, setSource, setOrigin]
