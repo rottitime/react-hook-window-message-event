@@ -5,7 +5,7 @@ export default function ParentPage() {
   const [text, setText] = useState('')
 
   useMessage('authenticate', (send, payload) => {
-    setText((p) => JSON.stringify(payload))
+    setText((p) => p + '\n' + JSON.stringify(payload))
     //send back to sender a boolean payload
     send({ type: 'authenticate', payload: { success: true } })
   })
@@ -14,7 +14,7 @@ export default function ParentPage() {
     <>
       <h1>Parent</h1>
 
-      <label htmlFor="output">Output</label>
+      <label htmlFor="output">Output from child</label>
       <textarea
         id="output"
         value={text || 'Awaiting message...'}
