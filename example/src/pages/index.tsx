@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import { useQuery } from '@tanstack/react-query'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,10 +18,6 @@ const fetchData = async () => {
 }
 
 export default function Home() {
-  const { data, isLoading } = useQuery<null, Error, Results>(['starwars'], {
-    queryFn: fetchData
-  })
-
   return (
     <>
       <Head>
@@ -46,19 +41,7 @@ export default function Home() {
           </div>
         </div>
         <hr />
-        <h2>Fetch status</h2>
-        <div>
-          {isLoading ? (
-            'Loading...'
-          ) : (
-            <div data-testid="fetched-data">
-              {data?.results.map(({ name }) => (
-                <li key={name}>{name}</li>
-              ))}
-            </div>
-          )}
-        </div>
-        <hr />
+
         <div>
           <a
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
