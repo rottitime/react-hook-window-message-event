@@ -11,12 +11,18 @@ export default function ChildPage() {
     <div className="App">
       <h1>Child page</h1>
 
-      <label htmlFor="output">Output from parent</label>
-      <textarea
-        id="output"
-        value={text || 'Awaiting message...'}
-        style={{ width: '80%', height: 350, display: 'block' }}
-      />
+      <p>Output from parent</p>
+      <code
+        style={{
+          width: '80%',
+          height: 350,
+          display: 'block',
+          border: '1px solid #ccc',
+          whiteSpace: 'pre'
+        }}
+      >
+        {text || 'Awaiting message...'}
+      </code>
 
       <button
         onClick={() =>

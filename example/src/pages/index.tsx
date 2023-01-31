@@ -14,12 +14,18 @@ export default function ParentPage() {
     <>
       <h1>Parent</h1>
 
-      <label htmlFor="output">Output from child</label>
-      <textarea
-        id="output"
-        value={text || 'Awaiting message...'}
-        style={{ width: '80%', height: 350, display: 'block' }}
-      />
+      <p>Output from parent</p>
+      <code
+        style={{
+          width: '80%',
+          height: 350,
+          display: 'block',
+          border: '1px solid #ccc',
+          whiteSpace: 'pre'
+        }}
+      >
+        {text || 'Awaiting message...'}
+      </code>
 
       <hr />
 
