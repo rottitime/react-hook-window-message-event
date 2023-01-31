@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 export default function ChildPage() {
   const [text, setText] = useState('')
+  const [sent, setSent] = useState(false)
   const { sendToParent } = useMessage('authenticate', (_send, payload) => {
     setText((p) => p + '\n' + JSON.stringify(payload))
   })
@@ -25,15 +26,21 @@ export default function ChildPage() {
       </code>
 
       <button
-        onClick={() =>
+        onClick={() => {
           sendToParent({
             type: 'authenticate',
             payload: { message: 'hello world', date: new Date().toLocaleString() }
           })
-        }
+          setSent(true)
+        }}
       >
         Send message to parent
       </button>
+      {!!sent && (
+        <p style={{ color: 'green' }}>
+          Your message has been sent, now open the parent window and check
+        </p>
+      )}
     </div>
   )
 }
