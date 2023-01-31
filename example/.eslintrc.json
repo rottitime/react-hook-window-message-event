@@ -25,19 +25,5 @@
       { "args": "all", "argsIgnorePattern": "^_" }
     ]
   },
-  "ignorePatterns": ["node_modules", "build", "public"],
-  "overrides": [
-    {
-      // only run testling library linting on test files not entire codebase
-      "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
-      "extends": ["plugin:testing-library/react"],
-      "rules": {
-        "react/display-name": 0,
-        "testing-library/prefer-find-by": 0,
-        "testing-library/no-container": "warn",
-        "testing-library/no-node-access": "warn",
-        "testing-library/prefer-presence-queries": 0
-      }
-    }
-  ]
+  "ignorePatterns": ["node_modules", "build", "public"]
 }
