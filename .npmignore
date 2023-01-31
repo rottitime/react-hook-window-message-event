@@ -3,4 +3,3 @@ tsconfig.json
 tslint.json
 .prettierrc.json
 lib/**/*.test.js
-example
