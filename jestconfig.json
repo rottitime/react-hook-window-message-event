@@ -1,4 +1,5 @@
 {
+  "testEnvironment": "jsdom",
   "transform": {
     "^.+\\.(t|j)sx?$": "ts-jest"
   },
