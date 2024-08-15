@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { IPostMessage, EventHandler } from './types'
+import type { IPostMessage, EventHandler } from './types'
 
 const postMessage = (data: IPostMessage, target: MessageEvent['source'], origin = '*') =>
   target?.postMessage(data, { targetOrigin: origin })
