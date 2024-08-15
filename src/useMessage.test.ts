@@ -5,6 +5,7 @@ import { IPostMessage } from './types'
 window.opener = jest.fn()
 
 const message: IPostMessage = { type: 'test', payload: { messsage: 'Hello' } }
+const sendersMessage: IPostMessage['payload'] = { message: 'Hello' }
 
 describe('useMessage', () => {
   it.skip('sends a message', () => {
@@ -30,7 +31,6 @@ describe('useMessage', () => {
     jest.spyOn(window, 'opener').mockReturnValue({ postMessage: jest.fn() })
     const { result } = renderHook(() => useMessage('test'))
     const { sendToParent } = result.current
-    const payload = { message: 'sent from friend' }
 
     act(() => {
       window.opener = { postMessage: jest.fn() }
@@ -44,27 +44,33 @@ describe('useMessage', () => {
     fireEvent(
       window,
       new MessageEvent('message', {
-        data: { type: message.type, payload },
+        data: { type: message.type, sendersMessage },
         origin: '*'
       })
     )
 
-    expect(result.current.history).toEqual([payload])
+    expect(result.current.history).toEqual([sendersMessage])
   })
 
-  it.skip('should call eventHandler when receiving a matching message', () => {
+  it.only('should call eventHandler when receiving a matching message', () => {
     const eventHandler = jest.fn()
     const { result } = renderHook(() => useMessage('test', eventHandler))
     const { sendToParent } = result.current
 
     act(() => {
+      window.opener = { postMessage: jest.fn() }
       sendToParent(message)
     })
 
-    expect(eventHandler).toHaveBeenCalledWith(
-      expect.any(Function),
-      message.payload.messsage
+    fireEvent(
+      window,
+      new MessageEvent('message', {
+        data: { type: message.type, payload: sendersMessage },
+        origin: '*'
+      })
     )
+
+    expect(eventHandler).toHaveBeenCalledWith(expect.any(Function), sendersMessage)
   })
 
   it.skip('should send message back to sender when calling sendToParent', () => {
