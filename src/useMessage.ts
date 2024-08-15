@@ -37,6 +37,8 @@ const useMessage = (watch: string, eventHandler?: EventHandler) => {
     // tslint:disable-next-line: no-shadowed-variable
     ({ origin, source, data }: MessageEvent) => {
       const { type, payload } = data
+
+      console.log('onWatchEventHandler', { origin, source, data, type, watch })
       if (type === watch) {
         setSource(source)
         setOrigin(origin)
