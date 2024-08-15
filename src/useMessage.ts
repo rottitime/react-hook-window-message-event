@@ -21,10 +21,8 @@ const useMessage = (watch: string, eventHandler?: EventHandler) => {
   originRef.current = origin
   sourceRef.current = source as MessageEvent['source']
 
-  const sendToSender = (data: IPostMessage) => {
-    console.log('sendToSender', data)
-    return postMessage(data, sourceRef.current, originRef.current)
-  }
+  const sendToSender = (data: IPostMessage) =>
+    postMessage(data, sourceRef.current, originRef.current)
 
   const sendToParent = (data: IPostMessage) => {
     const opener = window?.opener
