@@ -73,7 +73,7 @@ describe('useMessage', () => {
     expect(eventHandler).toHaveBeenCalledWith(expect.any(Function), sendersMessage)
   })
 
-  it.skip('should send message back to sender when calling sendToParent', () => {
+  it('should send message back to sender when calling sendToParent', () => {
     const { result } = renderHook(() => useMessage('test'))
     const { sendToParent } = result.current
 
@@ -85,8 +85,8 @@ describe('useMessage', () => {
     })
 
     expect(mockPostMessage).toHaveBeenCalledWith(
-      { type: 'test', payload: 'Hello' },
-      window.opener
+      { type: 'test', payload: message.payload },
+      { targetOrigin: '*' }
     )
   })
 
