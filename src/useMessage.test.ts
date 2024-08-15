@@ -2,16 +2,18 @@ import { renderHook, act, fireEvent } from '@testing-library/react'
 import useMessage from './useMessage'
 import { IPostMessage } from './types'
 
-window.opener = jest.fn()
-
 const message: IPostMessage = { type: 'test', payload: { messsage: 'Hello' } }
 const sendersMessage: IPostMessage['payload'] = { message: 'Hello' }
 
 describe('useMessage', () => {
-  it.skip('sends a message', () => {
+  beforeEach(() => {
+    window.opener = jest.fn()
+  })
+
+  it('sends a message', () => {
     jest
       .spyOn(window, 'opener')
-      .mockReturnValue({ postMessage: jest.fn() } as unknown as Window & {
+      .mockReturnValueOnce({ postMessage: jest.fn() } as unknown as Window & {
         postMessage: jest.Mock
       })
     const { result } = renderHook(() => useMessage('test'))
@@ -90,11 +92,11 @@ describe('useMessage', () => {
     )
   })
 
-  it.skip('should throw an error when parent window is closed', () => {
+  it('should throw an error when parent window is closed', () => {
     const { result } = renderHook(() => useMessage('test'))
     const { sendToParent } = result.current
 
-    const mockOpener = {}
+    const mockOpener = null
     window.opener = mockOpener
 
     expect(() => {

@@ -21,14 +21,11 @@ const useMessage = (watch: string, eventHandler?: EventHandler) => {
   originRef.current = origin
   sourceRef.current = source as MessageEvent['source']
 
-  const sendToSender = (data: IPostMessage) => {
-    console.log('sendToSender', data)
-    return postMessage(data, sourceRef.current, originRef.current)
-  }
+  const sendToSender = (data: IPostMessage) =>
+    postMessage(data, sourceRef.current, originRef.current)
 
   const sendToParent = (data: IPostMessage) => {
-    console.log('sendToParent', data)
-    const { opener } = window
+    const opener = window?.opener
     if (!opener) throw new Error('Parent window has closed')
     postMessage(data, opener)
   }
@@ -38,7 +35,6 @@ const useMessage = (watch: string, eventHandler?: EventHandler) => {
     ({ origin, source, data }: MessageEvent) => {
       const { type, payload } = data
 
-      console.log('onWatchEventHandler', { origin, source, data, type, watch })
       if (type === watch) {
         setSource(source)
         setOrigin(origin)
