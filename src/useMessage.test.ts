@@ -44,7 +44,7 @@ describe('useMessage', () => {
     fireEvent(
       window,
       new MessageEvent('message', {
-        data: { type: message.type, sendersMessage },
+        data: { type: message.type, payload: sendersMessage },
         origin: '*'
       })
     )
@@ -52,7 +52,7 @@ describe('useMessage', () => {
     expect(result.current.history).toEqual([sendersMessage])
   })
 
-  it.only('should call eventHandler when receiving a matching message', () => {
+  it('should call eventHandler when receiving a matching message', () => {
     const eventHandler = jest.fn()
     const { result } = renderHook(() => useMessage('test', eventHandler))
     const { sendToParent } = result.current
