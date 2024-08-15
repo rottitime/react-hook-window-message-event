@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { IPostMessage, EventHandler } from './types'
-
-const postMessage = (data: IPostMessage, target: MessageEvent['source'], origin = '*') =>
-  target?.postMessage(data, { targetOrigin: origin })
+import { postMessage } from './utils/window.utils'
 
 /**
  * It listens for a specific message type, and when it receives it, it calls the event handler with the
