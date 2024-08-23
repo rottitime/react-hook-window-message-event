@@ -16,7 +16,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@rottitime/react-hook-message-event": "^1.0.10",
+    "@rottitime/react-hook-message-event": "../",
     "@next/font": "13.1.2",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
