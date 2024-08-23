@@ -15,8 +15,8 @@
     "build": "next build",
     "start": "next start"
   },
-  "@rottitime/react-hook-message-event": "^1.0.10",
   "dependencies": {
+    "@rottitime/react-hook-message-event": "^1.0.10",
     "@next/font": "13.1.2",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
