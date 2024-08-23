@@ -5,3 +5,5 @@ export const postMessage = (
   target: MessageEvent['source'],
   origin = '*'
 ) => target?.postMessage(data, { targetOrigin: origin })
+
+export const isIframe = () => parent !== window

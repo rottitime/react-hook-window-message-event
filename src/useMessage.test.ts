@@ -8,6 +8,7 @@ const sendersMessage: IPostMessage['payload'] = { message: 'Hello' }
 describe('useMessage', () => {
   beforeEach(() => {
     window.opener = jest.fn()
+    window.parent = jest.fn() as unknown as Window
   })
 
   it('sends a message', () => {
