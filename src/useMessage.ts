@@ -21,8 +21,6 @@ const useMessage = (watch: string, eventHandler?: EventHandler) => {
   originRef.current = origin
   sourceRef.current = source as MessageEvent['source']
 
-  //function to check boolean
-
   const sendToSender = (data: IPostMessage) =>
     postMessage(data, sourceRef.current, originRef.current)
 

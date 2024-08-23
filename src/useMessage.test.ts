@@ -32,8 +32,6 @@ describe('useMessage', () => {
     })
   })
 
-  describe('iframe', () => {})
-
   it('Recieved message is stored in history', async () => {
     jest.spyOn(window, 'opener').mockReturnValue({ postMessage: jest.fn() })
     const { result } = renderHook(() => useMessage('test'))
