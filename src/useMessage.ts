@@ -28,8 +28,6 @@ const useMessage = (watch: string, eventHandler?: EventHandler) => {
 
   const sendToParent = (data: IPostMessage) => {
     const opener = isIframe() ? window?.parent : window?.opener
-
-    console.log('**********', { opener })
     if (!opener) throw new Error('Parent window has closed')
     postMessage(data, opener)
   }
