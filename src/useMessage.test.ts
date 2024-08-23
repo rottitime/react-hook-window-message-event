@@ -8,24 +8,27 @@ const sendersMessage: IPostMessage['payload'] = { message: 'Hello' }
 describe('useMessage', () => {
   beforeEach(() => {
     window.opener = jest.fn()
+    window.parent = jest.fn() as unknown as Window
   })
 
-  it('sends a message', () => {
-    jest
-      .spyOn(window, 'opener')
-      .mockReturnValueOnce({ postMessage: jest.fn() } as unknown as Window & {
-        postMessage: jest.Mock
+  describe('new tab', () => {
+    it('sends a message', () => {
+      jest
+        .spyOn(window, 'opener')
+        .mockReturnValueOnce({ postMessage: jest.fn() } as unknown as Window & {
+          postMessage: jest.Mock
+        })
+      const { result } = renderHook(() => useMessage('test'))
+      const { sendToParent } = result.current
+
+      act(() => {
+        window.opener = { postMessage: jest.fn() }
+        sendToParent(message)
       })
-    const { result } = renderHook(() => useMessage('test'))
-    const { sendToParent } = result.current
 
-    act(() => {
-      window.opener = { postMessage: jest.fn() }
-      sendToParent(message)
-    })
-
-    expect(window.opener.postMessage).toHaveBeenCalledWith(message, {
-      targetOrigin: '*'
+      expect(window.opener.postMessage).toHaveBeenCalledWith(message, {
+        targetOrigin: '*'
+      })
     })
   })
 

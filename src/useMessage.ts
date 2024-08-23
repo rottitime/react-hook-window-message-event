@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { IPostMessage, EventHandler } from './types'
-import { postMessage } from './utils/window.utils'
+import { postMessage, isIframe } from './utils/window.utils'
 
 /**
  * It listens for a specific message type, and when it receives it, it calls the event handler with the
@@ -25,7 +25,7 @@ const useMessage = (watch: string, eventHandler?: EventHandler) => {
     postMessage(data, sourceRef.current, originRef.current)
 
   const sendToParent = (data: IPostMessage) => {
-    const opener = window?.opener
+    const opener = isIframe() ? window?.parent : window?.opener
     if (!opener) throw new Error('Parent window has closed')
     postMessage(data, opener)
   }
